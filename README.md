@@ -143,7 +143,7 @@ scrape_configs:
       script: [speedtest]
     static_configs:
       - targets:
-        - 127.0.0.1
+        - 127.0.0.1:9469
     scrape_interval: 60m
     scrape_timeout: 90s
   - job_name: 'script_exporter'
@@ -152,6 +152,10 @@ scrape_configs:
       - targets:
         - 127.0.0.1:9469
 ```
+
+## helm chart
+
+If running in kubernetes, there is a helm chart leveraging this with a built-in `ServiceMonitor` for an autoconfigured solution: https://github.com/billimek/billimek-charts/tree/master/charts/speedtest-prometheus
 
 ## License
 
