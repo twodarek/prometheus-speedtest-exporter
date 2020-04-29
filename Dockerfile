@@ -25,5 +25,6 @@ FROM    alpine:3.18 AS rt-env
 RUN     apk add -U --no-cache mtr
 COPY    --from=build-env /src/mtr-exporter/bin/* /usr/bin/mtr-exporter
 
-EXPOSE  8080
+EXPOSE 9469
+COPY config.yaml config.yaml
 ENTRYPOINT ["/usr/bin/mtr-exporter"]
