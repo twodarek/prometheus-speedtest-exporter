@@ -128,6 +128,31 @@ One-off building and "installation":
 
     $> go install github.com/mgumz/mtr-exporter/cmd/mtr-exporter@latest
 
+
+## Prometheus configuration
+
+The script_exporter needs to be passed the script name as a parameter (script). It is advised to use a long `scrape_interval` to avoid excessive bandwidth use.
+
+Example config:
+
+```yaml
+scrape_configs:
+  - job_name: 'speedtest'
+    metrics_path: /probe
+    params:
+      script: [speedtest]
+    static_configs:
+      - targets:
+        - 127.0.0.1
+    scrape_interval: 60m
+    scrape_timeout: 90s
+  - job_name: 'script_exporter'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+        - 127.0.0.1:9469
+```
+
 ## License
 
 see LICENSE file
