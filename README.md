@@ -127,10 +127,6 @@ Build:
 One-off building and "installation":
 
     $> go install github.com/mgumz/mtr-exporter/cmd/mtr-exporter@latest
-=======
-[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/billimek/prometheus-speedtest-exporter)](https://hub.docker.com/r/billimek/prometheus-speedtest-exporter/tags)
->>>>>>> 7567d7a (fixing docker shield)
-
 
 ## Prometheus configuration
 
@@ -159,6 +155,10 @@ scrape_configs:
 ## helm chart
 
 If running in kubernetes, there is a helm chart leveraging this with a built-in `ServiceMonitor` for an autoconfigured solution: https://github.com/billimek/billimek-charts/tree/master/charts/speedtest-prometheus
+
+## Grafana Dashboard
+
+Included is an [example grafana dashboard](speedtest-exporter.json) as shown in the screenshot above.
 
 ## License
 
