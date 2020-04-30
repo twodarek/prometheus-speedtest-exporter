@@ -1,6 +1,6 @@
 # mtr-exporter
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/mgumz/mtr-exporter)](https://goreportcard.com/report/github.com/mgumz/mtr-exporter)
+[![Go Report Card](https://goreportcard.com/badge/github.com/twodarek/mtr-exporter)](https://goreportcard.com/report/github.com/twodarek/mtr-exporter)
 
 *mtr-exporter* periodically executes [mtr] to a given host and provides the
 measured results as [prometheus] metrics.
@@ -127,6 +127,9 @@ Build:
 One-off building and "installation":
 
     $> go install github.com/mgumz/mtr-exporter/cmd/mtr-exporter@latest
+=======
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/billimek/prometheus-speedtest-exporter)](https://hub.docker.com/r/billimek/prometheus-speedtest-exporter/tags)
+>>>>>>> 7567d7a (fixing docker shield)
 
 
 ## Prometheus configuration
