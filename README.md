@@ -139,7 +139,7 @@ sudo docker run --rm -p 9469:9469 billimek/prometheus-speedtest-exporter:latest
 Then invoke the `/probe` endpoint:
 
 ```bash
-curl http://localhost:9469/probe?script=speedtest
+curl "http://localhost:9469/probe?script=speedtest"
 ```
 
 After about 15 to 30 seconds or so you should see a result like this:
