@@ -1,24 +1,13 @@
-FROM alpine:latest
+FROM ubuntu:latest
 
-ENV SPEEDTEST_VERSION=1.2.0
 ENV SCRIPT_EXPORTER_VERSION=v2.5.2
 
-RUN apk add tar curl ca-certificates bash
+RUN apt-get update -qq && apt-get upgrade -y -qq && apt-get install curl -y -qq
 
-RUN ARCH=$(apk info --print-arch) && \
-    echo ARCH=$ARCH && \
-    case "$ARCH" in \
-      x86) _arch=i386 ;; \
-      armv7) _arch=armhf ;; \
-      *) _arch="$ARCH" ;; \
-    esac && \
-    echo https://install.speedtest.net/app/cli/ookla-speedtest-${SPEEDTEST_VERSION}-linux-${_arch}.tgz && \
-    curl -fsSL -o /tmp/ookla-speedtest.tgz \
-      https://install.speedtest.net/app/cli/ookla-speedtest-${SPEEDTEST_VERSION}-linux-${_arch}.tgz && \
-    tar xvfz /tmp/ookla-speedtest.tgz -C /usr/local/bin speedtest && \
-    rm -rf /tmp/ookla-speedtest.tgz
+RUN curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | bash
+RUN apt-get install speedtest -y -qq
 
-RUN ARCH=$(apk info --print-arch) && \
+RUN ARCH=$(uname -m) && \
     case "$ARCH" in \
       x86_64) _arch=amd64 ;; \
       armhf) _arch=armv7 ;; \
@@ -31,8 +20,9 @@ RUN ARCH=$(apk info --print-arch) && \
     chmod +x /usr/local/bin/script_exporter
 
 COPY config.yaml config.yaml
+COPY entrypoint.sh entrypoint.sh
 COPY speedtest-exporter.sh /usr/local/bin/speedtest-exporter.sh
 
 EXPOSE 9469
 
-ENTRYPOINT  [ "/usr/local/bin/script_exporter" ]
+ENTRYPOINT  [ "/entrypoint.sh" ]

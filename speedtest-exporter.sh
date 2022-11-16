@@ -21,7 +21,7 @@ then
             printMetric "speedtest_upload_bytes" "Upload Speed" "gauge" "$upload"
             printMetric "speedtest_downloadedbytes_bytes" "Downloaded Bytes" "gauge" "$downloadedbytes"
             printMetric "speedtest_uploadedbytes_bytes" "Uploaded Bytes" "gauge" "$uploadedbytes"
-        done < <(/usr/local/bin/speedtest --accept-license --accept-gdpr -f tsv)
+        done < <(/usr/bin/speedtest --accept-license --accept-gdpr -f tsv)
 else
     IFS=',' read -ra server_id_array <<< "$server_ids"
     for server_id in "${server_id_array[@]}"
@@ -33,6 +33,6 @@ else
             printMetric "speedtest_upload_bytes" "Upload Speed" "gauge" "$upload" "$server_id"
             printMetric "speedtest_downloadedbytes_bytes" "Downloaded Bytes" "gauge" "$downloadedbytes" "$server_id"
             printMetric "speedtest_uploadedbytes_bytes" "Uploaded Bytes" "gauge" "$uploadedbytes" "$server_id"
-        done < <(/usr/local/bin/speedtest --accept-license --accept-gdpr -f tsv --server-id $server_id)
+        done < <(/usr/bin/speedtest --accept-license --accept-gdpr -f tsv --server-id $server_id)
     done
 fi
